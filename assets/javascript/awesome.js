@@ -21,7 +21,10 @@ $(document).on("click", "#submit", function() {
     // AJAX pull for lyrics/artist
         // If 'By lyrics' selected
 
+
     var lyricsSearchURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_lyrics=" + searchInput + "&f_lyrics_language=en&f_has_lyrics=1&page_size=5&apikey=0f78df19f6a6884e6d61e22842b3c761";
+=======
+    var lyricsSearchURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_lyrics=" + lyricsSearchInput + "&f_lyrics_language=en&f_has_lyrics=1&page_size=5&apikey=0f78df19f6a6884e6d61e22842b3c761";
     $.ajax({
         url: lyricsSearchURL,
         method: "GET"
@@ -67,6 +70,37 @@ $(document).on("click", "#submit", function() {
 
         // If 'By artist' selected
 
+
+
+
+    // Update page to show top 5 songs to be picked by radio button
+    var title1 = $("<input>");
+    title1.attr("type", "radio");
+    title1.val("song1");
+    // title1.text([Insert Artist and Song name]);
+
+    var title2 = $("<input>");
+    title2.attr("type", "radio");
+    title2.val("song2");
+    // title2.text([Insert Artist and Song name]);
+
+    var title3 = $("<input>");
+    title3.attr("type", "radio");
+    title3.val("song3");
+    // title3.text([Insert Artist and Song name]);
+
+    var title4 = $("<input>");
+    title4.attr("type", "radio");
+    title4.val("song4");
+    // title4.text([Insert Artist and Song name]);
+
+    var title5 = $("<input>");
+    title5.attr("type", "radio");
+    title5.val("song5");
+    // title5.text([Insert Artist and Song name]);
+
+    var songResults = $("#song-results");
+    songResults.append(song1, song2, song3, song4, song5);
 
 
     // Update page to show top 5 songs to be picked by radio button
