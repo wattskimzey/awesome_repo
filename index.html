@@ -3,14 +3,51 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Document</title>
+    <title>Fun with Songs!</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
 
 </head>
 
 <body>
-    <p>THIS IS AN AWESOME SITE YET TO BE BORN</p>
-    <br>
-    <h4>BEHOLD!!!!</h4>
+    <header class="row justify-content-center">
+        <div id="headbox" class="justify-content-center">
+          <h1>Fun with Songs!</h1>
+        </div>
+      </header><br><br>
+
+        <div class="row justify-content-center">
+            <div class="col-8">
+                <p id="search-title">Search for some lyrics or an artist!</p>
+                    <div class="form-group row">
+                        <input type="radio" name="search-type" value="lyrics">&nbsp;By Lyrics
+                        <div>&nbsp; &nbsp;</div>
+                        <input type="radio" name="search-type" value="artist">&nbsp;By Artist<br>
+                        <input class="form-control" id="search-input" type="text">
+                    </div>
+                    <button class="btn btn-default" id="submit" type="submit">Submit</button>
+            </div>
+        </div><br>
+
+        <div class="row">
+            <div id="song-results" class="col-8">
+                <!-- <input type="radio" name="song-1" value="song-1"> -->
+            </div>
+      </div>
+
+      <div class="row justify-content-center">
+          <div class="col-8">
+            <textarea id="display" class="form-control" rows="10" placeholder=""></textarea>
+          </div>
+      </div>
+
+
+
+    <script src="https://code.jquery.com/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="assets/javascript/awesome.js"></script>
+
 </body>
 
 </html>
