@@ -19,7 +19,49 @@ $(document).on("click", "#submit", function() {
     // AJAX pull for lyrics/artist
         // If 'By lyrics' selected
 
+    var lyricsSearchURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_lyrics=" + lyricsSearchInput + "&f_lyrics_language=en&f_has_lyrics=1&page_size=5&apikey=0f78df19f6a6884e6d61e22842b3c761";
+    $.ajax({
+        url: lyricsSearchURL,
+        method: "GET"
+    }).then(function(response) {
+        console.log(response);
+        console.log(response.track_id);
+        theTrackId = response.track_id
+        song1 = response.message.body[1];
+    });
+    var lyricSearchURL = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=" + theTrackId + "&apikey=0f78df19f6a6884e6d61e22842b3c761";
+    $.ajax({
+        url: lyricSearchURL,
+        method: "GET"
+    }).then(function(response) {
+        console.log(response);
+        console.log(response.lyrics_body);
+        lyrics = response.lyrics_body
+    });
         // If 'By artist' selected
+    var artistSearchURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_artist=" + searchInput + "&f_lyrics_language=en&f_has_lyrics=1&page_size=5&apikey=0f78df19f6a6884e6d61e22842b3c761";
+    $.ajax({
+      url: artistSearchURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      console.log(response.track_id);
+      theTrackId = response.track_id
+    });
+    var lyricSearchURL = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=" + theTrackId + "&apikey=0f78df19f6a6884e6d61e22842b3c761";
+    $.ajax({
+      url: lyricSearchURL,
+      method: "GET"
+    }).then(function(response) {
+      console.log(response);
+      console.log(response.lyrics_body);
+      lyrics = response.lyrics_body
+    });
+
+
+
+        // If 'By artist' selected
+
 
 
     // Update page to show top 5 songs to be picked by radio button
