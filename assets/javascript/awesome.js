@@ -5,11 +5,10 @@ var song2 = "";
 var song3 = "";
 var song4 = "";
 var song5 = "";
-var fart = ["art", "bart", "cart", "carte", "chart", "dart", "dartt", "foart", "gart", "hardt", "hart", "harte", "hartt", "mahrt", "mart", "marte", "part", "parte", "schardt", "smart", "smartt", "start", "tart", "tarte", "tartt", "vazrt"]
-var farts = ["arts", "barts", "carts", "cartes", "charts", "darts", "dartts", "foarts", "garts", "hardts", "harts", "hartes", "hartts", "mahrts", "marts", "martes", "parts", "partes", "schardts", "smarts", "smartts", "starts", "tarts", "tartes", "tartts", "vazrts"]
+var fart = ["art", "bart", "cart", "carte", "chart", "dart", "dartt", "foart", "gart", "hardt", "hart", "harte", "hartt", "mahrt", "mart", "marte", "part", "parte", "schardt", "smart", "smartt", "start", "tart", "tarte", "tartt", "vazrt"];
+var farts = ["arts", "barts", "carts", "cartes", "charts", "darts", "dartts", "foarts", "garts", "hardts", "harts", "hartes", "hartts", "mahrts", "marts", "martes", "parts", "partes", "schardts", "smarts", "smartts", "starts", "tarts", "tartes", "tartts", "vazrts"];
 var theTrackId = "";
 var lyrics = "";
-var lyricsParsed = "";
 
 
 
@@ -143,17 +142,22 @@ $(document).on("click", ".song-result", function() {
 
 
 
-
-// When "Rhymify" button is clicked, display rhymes of last word in each line
 // Function to take lyrics from a continuous string and return an array of the last word in each line
+// Lines muse be separated by '\n'
 function lastWords(str) {
     var lastWords = [];
+    var punct = [".", ",", "?", "!", "(", "[", "{", "¿", "¡", ")", "]", "}", "/", "-"];
     var words = str.split(' ');
     console.log(words);
     for (var i = 0; i < words.length; i++) {
         var matchIndex = words[i].indexOf('\n');
         if (matchIndex != -1) {
             var newLast = words[i].slice(0, matchIndex);
+            for (var j = 0; j < punct.length; j++) {
+                while (newLast[newLast.length-1]==punct[j]||newLast[0]==punct[j]) {
+                    newLast = newLast.slice(0, newLast.length - 1);
+                }
+            }
             lastWords.push(newLast);
         }
     }
@@ -162,9 +166,14 @@ function lastWords(str) {
 
 console.log("lastWords: " + lastWords("Ah, come on\nOoh, who me?\nCome on, uh\n\nI saw you outside\nGetting out your ride\nA CLK 430, you've got style\nAs soon as I checked you out\nA ladies man no doubt\nFrom head to toe you're all style I like it\n\nHow bout you buy me a rose 'cause I think\nThis is gonna get a little interesting\nLet's see where this conversation goes\nI'm not sure that I want you to know\n\nI wish I could right now\nWish that I could show you how\nI'm feeling you (I'm feelin' you)\nBoy I try I can't hide (can't hide)\nHow badly I want you tonight\nI've gotta fight it\n\nIf you take me home\nGet me all alone\nNothing could happen it's just too soon\nI'm just being upfront"));
 
+// When "Rhymify" button is clicked, display rhymes of last word in each line
+$(document).on("click", ".rhymify", function () {
+
+});
+
 // When "Fartify" button is clicked, update all single-syllable rhymes of "fart"
 $(document).on("click", ".fartify", function () {
-    var lyricsArray = [];
+
 });
 
 // this is secret change to trigger a push.  maybe.  
