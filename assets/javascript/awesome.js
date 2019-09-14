@@ -64,7 +64,7 @@ $(document).on("click", "#submit", function() {
 
 
 
-});
+);
 
 // When radio button for a song is clicked, display lyrics of that song
 
