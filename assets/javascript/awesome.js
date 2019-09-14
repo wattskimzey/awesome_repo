@@ -23,8 +23,33 @@ $(document).on("click", "#submit", function() {
 
 
     // Update page to show top 5 songs to be picked by radio button
-    song1 = 
+    var title1 = $("<input>");
+    title1.attr("type", "radio");
+    title1.val("song1");
+    // title1.text([Insert Artist and Song name]);
 
+    var title2 = $("<input>");
+    title2.attr("type", "radio");
+    title2.val("song2");
+    // title2.text([Insert Artist and Song name]);
+
+    var title3 = $("<input>");
+    title3.attr("type", "radio");
+    title3.val("song3");
+    // title3.text([Insert Artist and Song name]);
+
+    var title4 = $("<input>");
+    title4.attr("type", "radio");
+    title4.val("song4");
+    // title4.text([Insert Artist and Song name]);
+
+    var title5 = $("<input>");
+    title5.attr("type", "radio");
+    title5.val("song5");
+    // title5.text([Insert Artist and Song name]);
+
+    var songResults = $("#song-results");
+    songResults.append(song1, song2, song3, song4, song5);
 
 
 });
