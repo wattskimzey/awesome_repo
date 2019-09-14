@@ -18,6 +18,7 @@ $(document).on("click", "#submit", function() {
 
     // AJAX pull for lyrics/artist
         // If 'By lyrics' selected
+
     var lyricsSearchURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_lyrics=" + lyricsSearchInput + "&f_lyrics_language=en&f_has_lyrics=1&page_size=5&apikey=0f78df19f6a6884e6d61e22842b3c761";
     $.ajax({
         url: lyricsSearchURL,
@@ -56,6 +57,10 @@ $(document).on("click", "#submit", function() {
       console.log(response.lyrics_body);
       lyrics = response.lyrics_body
     });
+
+
+
+        // If 'By artist' selected
 
 
 
