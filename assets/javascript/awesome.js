@@ -186,6 +186,19 @@ $(document).on("click", ".rhymify", function () {
 });
 
 // When "Fartify" button is clicked, update all single-syllable rhymes of "fart" or "farts"
-$(document).on("click", ".fartify", function () {
+var myString = "I am very smart. I like art";
+
+var lyricsArray = ["art", "bart", "cart", "carte", "chart", "dart", "dartt", "foart", "gart", "hardt", "hart", "harte", "hartt", "mahrt", "mart", "marte", "part", "parte", "schardt", "smart", "smartt", "start", "tart", "tarte", "tartt", "vazrt"];
+var replaceWord = "fart";
+
+
+$(lyricsArray).each(function(index) {
+
+    console.log("word...." + index + "  "+ lyricsArray[index]);
+
+    myString = myString.replace(lyricsArray[index], "fart");
 
 });
+
+console.log("old string is... " +myString)
+
