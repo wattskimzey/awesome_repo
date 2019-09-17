@@ -1,3 +1,5 @@
+// Production
+
 // Declare necessary variables
 var searchInput = "";
 var searchType = "";
