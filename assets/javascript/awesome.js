@@ -201,3 +201,4 @@ $(lyricsArray).each(function(index) {
 });
 
 console.log("old string is... " +myString)
+
