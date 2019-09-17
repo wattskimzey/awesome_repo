@@ -24,17 +24,17 @@ $(document).on("click", "#submit", function() {
 
     var lyricsSearchURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_lyrics=" + searchInput + "&f_lyrics_language=en&f_has_lyrics=1&page_size=5&apikey=0f78df19f6a6884e6d61e22842b3c761";
 
-    var lyricsSearchURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_lyrics=" + lyricsSearchInput + "&f_lyrics_language=en&f_has_lyrics=1&page_size=5&apikey=0f78df19f6a6884e6d61e22842b3c761";
+
     $.ajax({
         url: lyricsSearchURL,
         method: "GET"
     }).then(function(response) {
-        // console.log(response);
-        theTrackId = response.track_id;
-        console.log(theTrackId);
+        theTrackId = response.callback.message.body.tracklist.track.track_id;
+        console.log(thetrackId);
+                // console.log(theTrackId);
         
         song1 = response.message.body[1];
-        console.log(song1);
+        // console.log(song1);
     });
     var lyricSearchURL = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=" + theTrackId + "&apikey=0f78df19f6a6884e6d61e22842b3c761";
     $.ajax({
@@ -42,8 +42,8 @@ $(document).on("click", "#submit", function() {
         method: "GET"
     }).then(function(response) {
         // console.log(response);
-        lyrics = response.lyrics_body;
-        console.log(lyrics);
+        // lyrics = response.lyrics_body;
+        // console.log(lyrics);
         
     });
         // If 'By artist' selected
@@ -53,8 +53,8 @@ $(document).on("click", "#submit", function() {
       method: "GET"
     }).then(function(response) {
       // console.log(response);
-      console.log(response.track_id);
-      theTrackId = response.track_id;
+    //   console.log(response.track_id);
+    //   theTrackId = response.track_id;
     });
     var lyricSearchURL = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=" + theTrackId + "&apikey=0f78df19f6a6884e6d61e22842b3c761";
     $.ajax({
@@ -62,7 +62,7 @@ $(document).on("click", "#submit", function() {
       method: "GET"
     }).then(function(response) {
       // console.log(response);
-      console.log(response.lyrics_body);
+    //   console.log(response.lyrics_body);
       lyrics = response.lyrics_body;
     });
 
