@@ -99,14 +99,57 @@ $(document).on("click", ".song-result", function() {
     var thisTrackID = $(this).attr("id");
     var trackIDSearchURL = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=" + thisTrackID + "&apikey=0f78df19f6a6884e6d61e22842b3c761";
 
+
+
+    $.ajax({
+        url: lyricsSearchURL,
+        method: "GET"
+    }).then(function(response) {
+        theTrackId = response.callback.message.body.tracklist.track.track_id;
+        console.log(thetrackId);
+                // console.log(theTrackId);
+        
+        song1 = response.message.body[1];
+        // console.log(song1);
+    });
+    var lyricSearchURL = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=" + theTrackId + "&apikey=0f78df19f6a6884e6d61e22842b3c761";
+
+
     $.ajax({
         url: trackIDSearchURL,
         jsonp: "callback",
         dataType: "jsonp",
         method: "GET"
+
+    }).then(function(response) {
+        // console.log(response);
+        // lyrics = response.lyrics_body;
+        // console.log(lyrics);
+        
+    });
+        // If 'By artist' selected
+    var artistSearchURL = "https://api.musixmatch.com/ws/1.1/track.search?format=jsonp&callback=callback&q_artist=" + searchInput + "&f_lyrics_language=en&f_has_lyrics=1&page_size=5&apikey=0f78df19f6a6884e6d61e22842b3c761";
+    $.ajax({
+      url: artistSearchURL,
+      method: "GET"
+    }).then(function(response) {
+      // console.log(response);
+    //   console.log(response.track_id);
+    //   theTrackId = response.track_id;
+    });
+    var lyricSearchURL = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=" + theTrackId + "&apikey=0f78df19f6a6884e6d61e22842b3c761";
+    $.ajax({
+      url: lyricSearchURL,
+      method: "GET"
+    }).then(function(response) {
+      // console.log(response);
+    //   console.log(response.lyrics_body);
+      lyrics = response.lyrics_body;
+
     }).done(function(response) {
         currentLyrics = response.message.body.lyrics.lyrics_body;
         $("#lyrics-display").text(currentLyrics);
+
     });
 
     var rhymify = $("<button>");
