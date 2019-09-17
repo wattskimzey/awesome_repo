@@ -4,8 +4,8 @@ var searchInput = "";
 var searchType = "";
 var songs = [];
 var currentLyrics = "";
-var fart = ["art", "bart", "cart", "carte", "chart", "dart", "dartt", "foart", "gart", "hardt", "hart", "harte", "hartt", "mahrt", "mart", "marte", "part", "parte", "schardt", "smart", "smartt", "start", "tart", "tarte", "tartt", "vazrt"];
-var farts = ["arts", "barts", "carts", "cartes", "charts", "darts", "dartts", "foarts", "garts", "hardts", "harts", "hartes", "hartts", "mahrts", "marts", "martes", "parts", "partes", "schardts", "smarts", "smartts", "starts", "tarts", "tartes", "tartts", "vazrts"];
+var fart = ["art", "bart", "cart", "carte", "chart", "dart", "dartt", "foart", "gart", "hardt", "hart", "harte", "hartt", "heart", "mahrt", "mart", "marte", "part", "parte", "schardt", "smart", "smartt", "start", "tart", "tarte", "tartt", "vazrt"];
+var farts = ["arts", "barts", "carts", "cartes", "charts", "darts", "dartts", "foarts", "garts", "hardts", "harts", "hartes", "hartts", "hearts", "mahrts", "marts", "martes", "parts", "partes", "schardts", "smarts", "smartts", "starts", "tarts", "tartes", "tartts", "vazrts"];
 
 
 // Submit button on-click event to grab song lyrics or artist
@@ -324,6 +324,7 @@ function showResults() {
 // When radio button for a song is clicked, display lyrics of that song
 $(document).on("click", ".song-result", function() {
     $("#fun-buttons").empty();
+    $("#lyrics-display").empty();
     var thisTrackID = $(this).attr("id");
     var trackIDSearchURL = "https://api.musixmatch.com/ws/1.1/track.lyrics.get?format=jsonp&callback=callback&track_id=" + thisTrackID + "&apikey=0f78df19f6a6884e6d61e22842b3c761";
 
@@ -352,7 +353,7 @@ $(document).on("click", ".song-result", function() {
 // Lines must be separated by '\n'
 function lastWords(str) {
     var lastWords = [];
-    var punct = [".", ",", "?", "!", "(", "[", "{", "¿", "¡", ")", "]", "}", "/", "-"];
+    var punct = [".", ",", "?", "!", "(", "[", "{", "¿", "¡", ")", "]", "}", "/", "-", "\""];
     var lines = str.split('\n');
 
     for (var i = 0; i < lines.length; i++) {
@@ -364,6 +365,12 @@ function lastWords(str) {
                     newLast = newLast.slice(0, newLast.length - 1);
                 }
             }
+            if (newLast==="you're") {
+                newLast = "your";
+            }
+            if (newLast==="I'm") {
+                newLast = "time";
+            }
             if ((!newLast.includes("****"))&&(newLast!="")) {
                 lastWords.push(newLast);
             }
@@ -371,6 +378,34 @@ function lastWords(str) {
     }
     return lastWords;
 }
+
+// Function to take lyrics from a continuous string and return an array of the last word in each line
+// Lines must be separated by '\n'
+// function rhymify(str) {
+//     var tempArray = [];
+//     var punct = [".", ",", "?", "!", "(", "[", "{", "¿", "¡", ")", "]", "}", "/", "-"];
+//     var words = str.split(' ');
+
+//     for (var i = 0; i < words.length; i++) {
+//         lineWords = lines[i].split(' ');
+//         if (lineWords != "") {
+//             for (var j = 0; j < lineWords.length; j++) {
+            
+//                 var tempWord = lineWords[j];
+//                 for (var k = 0; k < punct.length; k++) {
+//                     while (newLast[newLast.length-1]==punct[j]||newLast[0]==punct[k]) {
+//                         newLast = newLast.slice(0, newLast.length - 1);
+//                     }
+//                 }
+//                 if ((!newLast.includes("****"))&&(newLast!="")) {
+//                     lastWords.push(newLast);
+//                 }
+//             }
+//         }
+//     }
+//     return lastWords;
+// }
+
 
 function displayRhymes(rhymes) {
     console.log(rhymes);
@@ -383,7 +418,7 @@ function displayRhymes(rhymes) {
             console.log(rhymes[q][r]);
             rhymesLine = rhymesLine + rhymes[q][r] + " ";
         }
-        rhymesLine = rhymesLine + '\n';
+        rhymesLine = rhymesLine + "\n";
         rhymesText = rhymesText + rhymesLine;
     }
     console.log(rhymesText);
@@ -393,6 +428,7 @@ function displayRhymes(rhymes) {
 // When "Rhymify" button is clicked, display rhymes of last word in each line
 $(document).on("click", ".rhymify", function () {
     var lasts = lastWords(currentLyrics);
+    console.log(lasts);
     var rhymes = [];
     var temp = [];
     for (var z = 0; z < lasts.length; z++) {
@@ -416,21 +452,27 @@ $(document).on("click", ".rhymify", function () {
 });
 
 // When "Fartify" button is clicked, update all single-syllable rhymes of "fart" or "farts"
-var myString = "I am very smart. I like art";
-
-var lyricsArray = ["art", "bart", "cart", "carte", "chart", "dart", "dartt", "foart", "gart", "hardt", "hart", "harte", "hartt", "mahrt", "mart", "marte", "part", "parte", "schardt", "smart", "smartt", "start", "tart", "tarte", "tartt", "vazrt"];
-var replaceWord = "fart";
-
-
-$(lyricsArray).each(function(index) {
-
-    console.log("word...." + index + "  "+ lyricsArray[index]);
-
-    myString = myString.replace(lyricsArray[index], "fart");
-
+$(document).on("click", ".fartify", function () {
+    var splitWords = currentLyrics.split(' ');
+    for (var e = 0; e < splitWords.length; e++) {
+        for (var f = 0; f < fart.length; f++) {
+            if (splitWords[e].includes(fart[f])) {
+                splitWords[e].replace(fart[f], "fart");
+            }
+            if (splitWords[e].includes(farts[f])) {
+                splitWords[e].replace(farts[f], "farts");
+            }
+        }
+    }
+    console.log(splitWords);
 });
 
+
+var heart = "heart,";
+console.log(heart.includes("heart"));
+
 console.log("old string is... " +myString)
 
 
 console.log("old string is... " +myString)
+
